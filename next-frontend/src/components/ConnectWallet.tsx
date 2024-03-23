@@ -7,9 +7,12 @@ import { useRouter } from 'next/navigation'
 import { Button } from "./ui/button";
 import { Window as KeplrWindow } from "@keplr-wallet/types";
 import { walletState } from "@/store/walletConnected";
+import { ethers } from "ethers";
 
 declare global {
-  interface Window extends KeplrWindow {}
+  interface Window {
+    ethereum: any
+  }
 }
 
 const ConnectWallet = () => {
@@ -17,52 +20,32 @@ const ConnectWallet = () => {
   const [userAddress, setUserAddress] = useState("");
   const router = useRouter()
 
-  const setSecret =useSetRecoilState(secret);
-
-  const CHAIN_ID = "pulsar-3";
-  const url = "https://api.pulsar3.scrttestnet.com";
-
   const connectWalletHandler = async () => {
-    if (window.keplr) {
+    if (window.ethereum) {
       try {
-            const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-          
-          while (
-            !window.keplr ||
-            !window.getEnigmaUtils ||
-            !window.getOfflineSignerOnlyAmino
-          ) {
-            await sleep(50);
-          }
-          
-          await window.keplr.enable(CHAIN_ID);
-          
-          const keplrOfflineSigner = window.keplr.getOfflineSignerOnlyAmino(CHAIN_ID);
-          const [{ address: myAddress }] = await keplrOfflineSigner.getAccounts();
-          setUserAddress(myAddress)
-          
-          const secretjs = new SecretNetworkClient({
-            url,
-            chainId: CHAIN_ID,
-            wallet: keplrOfflineSigner,
-            walletAddress: myAddress,
-            encryptionUtils: window.keplr.getEnigmaUtils(CHAIN_ID),
-          });
-          setSecret({ 
-            secretjs,
-            address:myAddress
-          })
-          setIsConnected(true);
-        } catch (error) {
-          alert("Error connecting to kelpr")
-          console.error("Error connecting to kelpr", error);
-          setIsConnected(false);
-        }
-      } else {
-        alert("Please install keplr!");
+        await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
+
+        const provider = new ethers.BrowserProvider(window.ethereum);
+
+        const signer = await provider.getSigner();
+
+        setIsConnected(true);
+        setUserAddress(await signer.getAddress());
+        console.log("Connected", userAddress);
+
+        setIsConnected(true);
+      } catch (error) {
+        alert("Error connecting to metamask")
+        console.error("Error connecting to metamask", error);
         setIsConnected(false);
       }
-      router.push('/post')
+    } else {
+      alert("Please install metamask!");
+      setIsConnected(false);
+    }
+    router.push('/post')
   };
 
   return (
