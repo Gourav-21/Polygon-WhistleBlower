@@ -2,7 +2,8 @@ import { POST } from "@/db";
 import dbConnect from "@/db/dbConnect";
 import { post } from "@/store/posts";
 import { unstable_noStore } from "next/cache";
-import { SecretNetworkClient } from "secretjs";
+import Posts from "@/artifacts/contracts/Posts.sol/Posts.json"
+import { Contract, ethers } from "ethers";
 
 type metadata={
   _id:string,
@@ -15,37 +16,34 @@ interface data{
 	posts:post[]
 }
 
-const query = async (query) => {
-    
-    let secretjs = new SecretNetworkClient({
-		chainId: "pulsar-3",
-		url: "https://api.pulsar.scrttestnet.com",
-	});
-
-	const my_query:data = await secretjs.query.compute.queryContract({
-	  contract_address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
-	  code_hash: process.env.NEXT_PUBLIC_CONTRACT_HASH,
-	  query: query,
-	});
-  
-	return my_query;
+const query = async () => {
+    const provider = new ethers.JsonRpcProvider()
+    const contract = new Contract(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS, Posts.abi, provider)
+	const p= await contract.getPosts()
+	return p
 };
 
 export async function GET(request: Request) {
 	unstable_noStore();
     await dbConnect();
-    const msg={ get_post: {} }
-	const posts: data = await query(msg)
-
+	const posts: data = await query()
+	const formattedData = posts.map(result => {
+		return {
+			timestamp: result[0],
+			category: result[1],
+			description: result[2]
+		};
+	});
+	
 	const metadata:metadata[] = await POST.find().populate('comments');
 	
-	const mergedData = posts.posts.map(post => {
-		const matchedData:metadata|undefined = metadata.find(data => data.date === post.date);
+	const mergedData = posts.map(post => {
+		const matchedData:metadata|undefined = metadata.find(data => data.date === post[0]);
 		const result = {
 			id: matchedData?._id,
-			date: post.date,
-			title: post.title,
-			description: post.description,
+			date: post[0],
+			title: post[1],
+			description: post[2],
 			vote:matchedData?.vote,
 			comments:matchedData?.comments,
 		};
