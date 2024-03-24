@@ -27,7 +27,7 @@ export default function Card(item) {
                 //   : "text-muted-foreground"
               )}
             >
-              {formatDistanceToNow(new Date(item.date), {
+              {item?.date && formatDistanceToNow(new Date(item.date), {
                 addSuffix: true,
               })}
             </div>
