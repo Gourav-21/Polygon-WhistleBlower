@@ -31,12 +31,10 @@
     "react-dom": "^18",
     "react-resizable-panels": "^2.0.13",
     "recoil": "^0.7.7",
-    "secretjs": "^1.12.4",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@keplr-wallet/types": "^0.12.70",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

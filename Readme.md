@@ -8,45 +8,6 @@ Whistleblower is a decentralized platform designed to enable whistleblowers to r
 ## Investor Pitch:
 The platform addresses the critical need for secure whistleblowing mechanisms, particularly in environments where individuals fear retaliation for exposing misconduct. By leveraging blockchain technology and Secret smart contracts, Whistleblower ensures the confidentiality of whistleblowers while facilitating the reporting process. This product-market fit addresses the growing demand for transparency and accountability across various sectors.
 
-## Development Deepdive:
-The contract logic is implemented using CosmWasm, a framework for writing smart contracts in Rust for the Cosmos blockchain ecosystem. Let's break down the key components and functionalities of the contract:
-
-1. **Instantiation (`instantiate`):**
-   - Upon contract instantiation, the `instantiate` function is called.
-   - It saves the initial post provided in the `InstantiateMsg` to the storage.
-   - This function is executed only once during contract deployment.
-
-2. **Execution (`execute`):**
-   - The `execute` function handles different execute messages defined in the `ExecuteMsg` enum.
-   - Currently, it supports creating a new post (`CreatePost` message).
-
-3. **Creating a Post (`create_post`):**
-   - This function creates a new post with the provided title and description.
-   - It constructs a `Post` struct with the title and description.
-   - The newly created post is added to the `POSTS` collection in the storage.
-
-4. **Querying (`query`):**
-   - The `query` function handles querying messages defined in the `QueryMsg` enum.
-   - Currently, it supports getting the latest post.
-
-5. **Getting a Post (`get_post`):**
-   - This function retrieves the latest post stored in the contract's storage.
-   - It loads the post from the storage using the `POSTS` collection.
-
-#### Storage Management:
-- The contract utilizes the `POSTS` singleton to store post data.
-- Each post is represented by a `Post` struct containing a title, description and date.
-- The `POSTS` singleton is accessed and modified using the provided `Deps` and `DepsMut` instances.
-
-#### Debugging and Error Handling:
-- Debugging statements are included throughout the contract logic to aid in development and testing.
-- Error handling is essential for ensuring the contract behaves as expected. Currently, the contract does basic error handling by unwrapping results. However, in a production environment, it's crucial to implement proper error handling to handle potential failures gracefully.
-
-#### Conclusion:
-The contract logic primarily focuses on enabling users to create and retrieve posts. It leverages CosmWasm's functionalities for storage management, message handling, and error handling. Further enhancements could include additional functionalities such as post editing, deletion, or implementing access control to restrict certain actions to authorized users.
-
-
-
 ## ⚙️ Tech Stack
 
 - [Next.js](https://nextjs.org/) – Framework
@@ -70,7 +31,7 @@ Here's what you need to be able to run WhistleBlower:
 #### First Clone the repository
 
 ```shell
-git clone https://github.com/Gourav-21/WhistleBlower.git
+git clone https://github.com/Gourav-21/Polygon-WhistleBlower.git
 
 ```
 
