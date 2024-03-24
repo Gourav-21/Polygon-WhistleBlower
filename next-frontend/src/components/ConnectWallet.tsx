@@ -42,11 +42,13 @@ const ConnectWallet = () => {
         console.error("Error connecting to metamask", error);
         setIsConnected(false);
       }
+      router.push('/post')
     } else {
       alert("Please install metamask!");
       setIsConnected(false);
+      router.push('/post')
     }
-    router.push('/post')
+    
   };
 
   return (
