@@ -1,4 +1,4 @@
-import { secret } from "@/store/secret";
+import { provider as providerState } from "@/store/provider";
 import { useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { Button } from "@/components/ui/button"
@@ -23,14 +23,13 @@ export default function AddPostside(props) {
   const { toast } = useToast()
   console.log(loading)
 
-  const { secretjs, address } = useRecoilValue(secret)
+  const provider = useRecoilValue(providerState)
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
   const execute = async (msg, id) => {
     try {
-      const provider = new ethers.JsonRpcProvider()
       const signer = await provider.getSigner()
       const contract = new Contract(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS, Posts.abi, signer)
       const tx = await contract.createPost(msg.title,msg.description,msg.date.toISOString())
