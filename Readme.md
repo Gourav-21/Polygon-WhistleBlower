@@ -1,11 +1,13 @@
 # Whistleblower Platform
+
 ![Whistleblower](image-2.png)
 
-
 ## User-Focused Summary:
+
 Whistleblower is a decentralized platform designed to enable whistleblowers to report misconduct securely and privately. Users can submit reports without revealing their identities, fostering transparency and accountability within organizations.
 
 ## Investor Pitch:
+
 The platform addresses the critical need for secure whistleblowing mechanisms, particularly in environments where individuals fear retaliation for exposing misconduct. By leveraging blockchain technology and Secret smart contracts, Whistleblower ensures the confidentiality of whistleblowers while facilitating the reporting process. This product-market fit addresses the growing demand for transparency and accountability across various sectors.
 
 ## ⚙️ Tech Stack
@@ -25,8 +27,9 @@ The platform addresses the critical need for secure whistleblowing mechanisms, p
 
 Here's what you need to be able to run WhistleBlower:
 
-- Node.js 
+- Node.js
 - MongoDB Database - connection string
+- POLYGON_TESTNET_URL or RPC_PROVIDER 
 
 #### First Clone the repository
 
@@ -37,36 +40,47 @@ git clone https://github.com/Gourav-21/Polygon-WhistleBlower.git
 
 ### Set up the contract
 
-#### 1. Deploy the smart contract on the Secret Network testnet
-go to the node folder WhistleBlower->contract->node 
+#### 1. Deploy the smart contract on the Polygon testnet
+
+go to the node folder Polygon-WhistleBlower
 
 ```shell
-cd WhistleBlower/contract/node
+cd Polygon-WhistleBlower
 ```
+
 #### 2. Install npm dependencies
 
 ```shell
 npm install
 ```
 
-#### 3. run
+#### 3. change the url and accounts in hardhat.config.js
 
 ```shell
-node index.js
+url:"YOUR_POLYGON_TESTNET_URL"
+accounts:["YOUR_PRIVATE_KEY"]
 ```
 
-#### 4. copy the `contract address` and `contract hash` from terminal
+#### 4. run
+
+```shell
+npx hardhat ignition deploy ./ignition/modules/Posts.ts --network matic
+```
+
+#### 4. copy the `contract address` from terminal
 
 ### Set up the frontend
 
 #### 1. go to the next-frontend folder
 
 ```shell
-cd ../../next-frontend/
+cd  cd ../next-frontend/
 ```
+
 or if you are in the WhistleBlower folder
+
 ```
-cd next-frontend 
+cd next-frontend
 ```
 
 #### 2. Install npm dependencies
@@ -82,16 +96,15 @@ cp .env.example .env.local
 ```
 
 The following environment variables must be set:
-- `CONTRACT_ADDRESS` - The contract address of the WhistleBlower smart contract
 
-- `CONTRACT_HASH` - The contract hash of the WhistleBlower smart contract
+- `NEXT_PUBLIC_CONTRACT_ADDRESS` - The contract address of the WhistleBlower smart contract
+
+- `NEXT_PUBLIC_RPC_PROVIDER` - The api of your rpc provider
 
 - `MONGODB_URI` - The connection string for the MongoDB database
 
 Replace the contract address and contract hash with the one you copied from the terminal
 and create a [MongoDB database](https://www.mongodb.com/) and copy the connection string
-
-
 
 #### 4. Run the dev server
 
@@ -103,10 +116,10 @@ npm run dev
 
 Visit [http://localhost:3000](http://localhost:3000) in your browser.
 
-
 ## Features
 
 ### Usage Guidelines:
+
 - Users can navigate to the platform's frontend to view whistleblower posts anonymously.
 - To submit a whistleblower report, users doesnt need to create an account.
 - So, users can submit a report providing details of the misconduct without revealing their identity.
@@ -114,12 +127,14 @@ Visit [http://localhost:3000](http://localhost:3000) in your browser.
 - The platform ensures the privacy and security of whistleblowers by encrypting and storing data using Secret smart contracts.
 
 ### Additional Information:
+
 - MongoDB is used to store additional details such as post metadata like likes, and comments.
 - The frontend is developed using Next.js, providing a seamless user experience.
 - Smart contracts are deployed on the Secret Network for privacy and security.
 - The platform encourages collaboration and contributions by being open source.
 
 ### Demo Video:
+
 https://www.youtube.com/watch?v=gEg9Jlg3IJ4&feature=youtu.be
 
 [![Whistleblower](WhistleBlower.gif)](https://www.youtube.com/watch?v=gEg9Jlg3IJ4)
