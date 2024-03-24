@@ -4,7 +4,7 @@
 
 ## Introduction
 
-Whistleblower is a decentralized platform designed to enable whistleblowers to report misconduct securely and privately. Users can submit reports without revealing their identities, fostering transparency and accountability within organizations.
+Welcome to Whistleblower Platform! Our decentralized platform is designed to empower whistleblowers by providing a secure and private environment for reporting misconduct. With a strong emphasis on user anonymity, individuals can submit reports without compromising their identities. Our goal is to foster transparency, accountability, and integrity within organizations while uncovering hidden truths.
 
 ## ⚙️ Tech Stack
 
