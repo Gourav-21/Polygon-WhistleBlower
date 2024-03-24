@@ -1,7 +1,7 @@
 import Post from "./post";
 
 async function getpost() {
-  const res = await fetch('https://secretwhistleblower.vercel.app/api/posts', { next: { tags: ['posts'] }})
+  const res = await fetch('https://polygonwhistleblower.vercel.app/api/posts', { next: { tags: ['posts'] }})
   const data= await res.json();
   return data.posts;
 }
