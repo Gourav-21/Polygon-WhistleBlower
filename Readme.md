@@ -2,13 +2,9 @@
 
 ![Whistleblower](image-2.png)
 
-## User-Focused Summary:
+## Introduction
 
 Whistleblower is a decentralized platform designed to enable whistleblowers to report misconduct securely and privately. Users can submit reports without revealing their identities, fostering transparency and accountability within organizations.
-
-## Investor Pitch:
-
-The platform addresses the critical need for secure whistleblowing mechanisms, particularly in environments where individuals fear retaliation for exposing misconduct. By leveraging blockchain technology and Secret smart contracts, Whistleblower ensures the confidentiality of whistleblowers while facilitating the reporting process. This product-market fit addresses the growing demand for transparency and accountability across various sectors.
 
 ## ⚙️ Tech Stack
 
