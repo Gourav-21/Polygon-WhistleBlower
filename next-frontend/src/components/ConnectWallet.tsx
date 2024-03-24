@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { SecretNetworkClient } from "secretjs";
-import { secret } from "../store/secret";
+import { provider, secret } from "../store/provider";
 import { useRouter } from 'next/navigation'
 import { Button } from "./ui/button";
 import { Window as KeplrWindow } from "@keplr-wallet/types";
@@ -17,6 +17,7 @@ declare global {
 
 const ConnectWallet = () => {
   const [isConnected, setIsConnected] = useRecoilState(walletState);
+  const setProvider=useSetRecoilState(provider)
   const [userAddress, setUserAddress] = useState("");
   const router = useRouter()
 
@@ -28,7 +29,7 @@ const ConnectWallet = () => {
         });
 
         const provider = new ethers.BrowserProvider(window.ethereum);
-
+        setProvider(provider)
         const signer = await provider.getSigner();
 
         setIsConnected(true);
