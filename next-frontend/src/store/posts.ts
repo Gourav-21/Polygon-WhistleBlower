@@ -36,5 +36,5 @@ export const defaultPost:post={
 
 export const postsAtom = atom<post[]>({
     key: 'postsAtom',
-    default: []
+    default: [defaultPost]
 });
