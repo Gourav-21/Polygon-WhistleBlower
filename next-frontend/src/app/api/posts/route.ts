@@ -17,7 +17,7 @@ interface data{
 }
 
 const query = async () => {
-    const provider = new ethers.JsonRpcProvider()
+    const provider = new ethers.JsonRpcProvider(process.env.NEXT_PUBLIC_RPC_PROVIDER)
     const contract = new Contract(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS, Posts.abi, provider)
 	const p= await contract.getPosts()
 	return p
