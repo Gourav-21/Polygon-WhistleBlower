@@ -25,6 +25,7 @@ export default function PostView(){
     const [date,setdate]=useRecoilState(postState);
     const post=useRecoilValue(postAtomFamily(date)) || defaultPost;
     const setCommentState= useSetRecoilState(commentState)
+    const [loading,setLoading]=useState(false);
     
     const setPosts = useSetRecoilState(postAtomFamily(date));
     const { toast } = useToast()
@@ -94,6 +95,10 @@ export default function PostView(){
                     
                   <Button
                     onClick={async () => {
+                      if(loading){
+                        return
+                      }
+                      setLoading(true)
                       if (!comments) {
                         toast({
                           variant: "destructive",
@@ -134,6 +139,7 @@ export default function PostView(){
                           description: "⚠️ Something went wrong",
                         })
                       }
+                      setLoading(false);
                     }}
                     size="sm"
                     className="ml-auto"
