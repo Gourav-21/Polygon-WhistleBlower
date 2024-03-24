@@ -1,3 +1,4 @@
+"use client"
 import { cn } from "@/lib/utils";
 import { postAtomFamily } from "@/store/postAtomFamily";
 import { Vote } from "@/store/vote";
